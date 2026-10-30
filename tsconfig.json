@@ -3,7 +3,7 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "CommonJS",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
 
     "rootDir": "./src",
     "outDir": "./dist",
@@ -20,6 +20,6 @@
 
     "sourceMap": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "src/config/env.ts"],
   "exclude": ["node_modules", "dist"]
 }
