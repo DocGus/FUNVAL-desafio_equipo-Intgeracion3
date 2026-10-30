@@ -1,8 +1,7 @@
 import type { Request, Response } from "express";
 import { categories, category } from "../data/categories.data";
 
-
-// Traer todas las categorías GET
+// 1. Traer todas las categorías GET
 export const traerTodasCategorias = (req: Request, res: Response): void => {
   res.status(200).json({
     ok: true,
@@ -11,7 +10,7 @@ export const traerTodasCategorias = (req: Request, res: Response): void => {
   });
 };
 
-// Traer una categoría GET (no es tan util con tan pocas, pero bueno hhahahah)
+// 2. Traer una categoría GET por ID
 export const traerUnaCategoria = (req: Request, res: Response): void => {
   const idBuscando = Number(req.params.id);
 
@@ -49,7 +48,7 @@ export const crearCategoria = (req: Request, res: Response): void => {
   }
 
   // Generar ID autoincremental seguro
-  const nextId = categories.length > 0 ? Math.max(...categories.map(c => c.id)) + 1 : 1;
+  const nextId = categories.length > 0 ? Math.max(...categories.map((c) => c.id)) + 1 : 1;
 
   const nuevaCategoria: category = {
     id: nextId,
