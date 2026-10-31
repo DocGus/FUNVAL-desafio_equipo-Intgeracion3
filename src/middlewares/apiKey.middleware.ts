@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 
-export const apiKeyMiddleware = (
+const validateKey = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -10,9 +10,13 @@ export const apiKeyMiddleware = (
 
   if (!validApiKey || apiKey !== validApiKey) {
     return res.status(401).json({
-      message: "Unauthorized: invalid API key",
+      success: false,
+      message: "Acceso no autorizado: x-api-key inválido o ausente",
     });
   }
 
   next();
 };
+
+export const apiKeyMiddleware = validateKey;
+export const validateApiKey = validateKey;

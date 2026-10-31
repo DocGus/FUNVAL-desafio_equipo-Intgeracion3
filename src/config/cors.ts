@@ -13,6 +13,8 @@ export const corsOptions: cors.CorsOptions = {
 
     return callback(new Error("Origin not allowed by CORS"));
   },
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "x-api-key"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "x-api-key"],
 };
+
+export const corsMiddleware = cors(corsOptions);

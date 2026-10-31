@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 
-export const loggerMiddleware = (
+const logRequest = (
   req: Request,
   _res: Response,
   next: NextFunction
@@ -11,3 +11,6 @@ export const loggerMiddleware = (
 
   next();
 };
+
+export const loggerMiddleware = logRequest;
+export const requestLogger = logRequest;
