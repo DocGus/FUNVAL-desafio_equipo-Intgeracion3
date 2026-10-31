@@ -1,14 +1,22 @@
-import { Request, Response, NextFunction } from 'express';
-// Middleware para validar la API Key
-export const validateApiKey = (req: Request, res: Response, next: NextFunction): void => {
-  const apiKey = req.headers['x-api-key'];
-  const expectedKey = process.env.API_KEY || 'funval-secret-key-2026';
-  if (!apiKey || apiKey !== expectedKey) {
-    res.status(401).json({
+import type { Request, Response, NextFunction } from "express";
+
+const validateKey = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const apiKey = req.header("x-api-key");
+  const validApiKey = process.env.API_KEY;
+
+  if (!validApiKey || apiKey !== validApiKey) {
+    return res.status(401).json({
       success: false,
-      message: 'Acceso no autorizado: x-api-key inválido o ausente'
+      message: "Acceso no autorizado: x-api-key inválido o ausente",
     });
-    return;
   }
+
   next();
 };
+
+export const apiKeyMiddleware = validateKey;
+export const validateApiKey = validateKey;

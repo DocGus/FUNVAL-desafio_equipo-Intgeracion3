@@ -19,13 +19,9 @@
     }
   },
   "paths": {
-    "/api/categories/": {
+    "/": {
       "get": {
-        "tags": [
-          "Categorias"
-        ],
-        "summary": "Obtener todas las categorías",
-        "description": "Retorna la lista completa de todas las categorías disponibles en memoria",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -33,154 +29,151 @@
         }
       },
       "post": {
-        "tags": [
-          "Categorias"
-        ],
-        "summary": "Crear una categoría",
-        "description": "Crea y registra una nueva categoría en memoria",
+        "description": "",
         "parameters": [
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "type": "string"
-          },
           {
             "name": "body",
             "in": "body",
-            "description": "Datos de la nueva categoría",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "Electrodomésticos"
+                "orderId": {
+                  "example": "any"
                 },
-                "description": {
-                  "type": "string",
-                  "example": "Neveras, lavadoras y microondas"
+                "productId": {
+                  "example": "any"
+                },
+                "quantity": {
+                  "example": "any"
+                },
+                "subtotal": {
+                  "example": "any"
                 }
               }
             }
           }
         ],
         "responses": {
-          "401": {
-            "description": "Unauthorized"
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "default": {
+            "description": ""
           }
-        },
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ]
+        }
       }
     },
-    "/api/categories/{id}": {
+    "/{id}": {
       "get": {
-        "tags": [
-          "Categorias"
-        ],
-        "summary": "Obtener categoría por ID",
-        "description": "Busca y retorna una sola categoría según su ID numérico",
+        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "description": "ID de la categoría a consultar",
-            "example": 1
+            "type": "string"
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
           "default": {
             "description": ""
           }
         }
       },
       "put": {
-        "tags": [
-          "Categorias"
-        ],
-        "summary": "Actualizar una categoría",
-        "description": "Actualiza el nombre o la descripción de una categoría existente",
+        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "description": "ID de la categoría a actualizar",
-            "example": 1
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "Datos a modificar",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "Tecnología Avanzada"
+                "orderId": {
+                  "example": "any"
                 },
-                "description": {
-                  "type": "string",
-                  "example": "Gadgets y computadoras de última generación"
+                "productId": {
+                  "example": "any"
+                },
+                "quantity": {
+                  "example": "any"
+                },
+                "subtotal": {
+                  "example": "any"
                 }
               }
             }
           }
         ],
         "responses": {
-          "401": {
-            "description": "Unauthorized"
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "default": {
+            "description": ""
           }
-        },
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ]
+        }
       },
       "delete": {
-        "tags": [
-          "Categorias"
-        ],
-        "summary": "Eliminar una categoría",
-        "description": "Elimina una categoría del sistema por su ID",
+        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "description": "ID de la categoría a eliminar",
-            "example": 1
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
             "type": "string"
           }
         ],
         "responses": {
-          "401": {
-            "description": "Unauthorized"
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "default": {
+            "description": ""
           }
-        },
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ]
+        }
       }
     }
   }

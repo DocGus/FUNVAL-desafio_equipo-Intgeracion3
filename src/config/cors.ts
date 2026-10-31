@@ -1,24 +1,20 @@
-import cors, { CorsOptions } from 'cors';
+import cors from "cors";
 
-//Urls permitidas para CORS
 const allowedOrigins = [
-  'http://localhost:3000',
-  'http://localhost:jorge',
-  'http://funvalestudiantes.org'
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
 ];
 
-export const corsOptions: CorsOptions = {
+export const corsOptions: cors.CorsOptions = {
   origin: (origin, callback) => {
-    // Permitir peticiones sin origen (como Postman o curl) o si está en la lista blanca
     if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Acceso no permitido por la política CORS'));
+      return callback(null, true);
     }
+
+    return callback(new Error("Origin not allowed by CORS"));
   },
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'x-api-key'],
-  credentials: true
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "x-api-key"],
 };
 
 export const corsMiddleware = cors(corsOptions);
