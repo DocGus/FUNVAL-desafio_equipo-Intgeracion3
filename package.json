@@ -22,6 +22,7 @@
   "license": "ISC",
   "description": "API REST E-commerce CRUD en memoria desarrollada con Node.js, Express y TypeScript",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "dotenv": "^18.0.9",
     "env": "^0.0.2",
@@ -30,6 +31,7 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/cors": "^2.8.19",
     "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.6",

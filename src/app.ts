@@ -1,24 +1,38 @@
-import express from 'express';
-import cors from 'cors';
-import swaggerUi from 'swagger-ui-express';
-import fs from 'fs';
-import path from 'path';
-import { env } from './config/env';
-import { loggerMiddleware } from './middlewares/logger.middleware';
-import productRoutes from './routes/products.routes';
+import express from "express";
+import swaggerUi from "swagger-ui-express";
+
+import { corsMiddleware } from "./config/cors";
+import { loggerMiddleware } from "./middlewares/logger.middleware";
+import { apiKeyMiddleware } from "./middlewares/apiKey.middleware";
+
+import usersRoutes from "./routes/users.routes";
+import categoriesRoutes from "./routes/categories.routes";
+import ordersRoutes from "./routes/orders.routes";
+import orderItemsRoutes from "./routes/orderItems.routes";
+import productsRoutes from "./routes/products.routes";
+
+const swaggerDocument = require("../swagger/swagger-output.json");
 
 const app = express();
 
-app.use(cors({ origin: env.corsOrigin, credentials: true }));
+// Middlewares globales
+app.use(corsMiddleware);
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(loggerMiddleware);
 
-app.use('/', productRoutes);
+// Documentación Swagger
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument)
+);
 
-const swaggerPath = path.join(__dirname, '..', 'swagger-output.json');
-if (fs.existsSync(swaggerPath)) {
-  const swaggerDocument = JSON.parse(fs.readFileSync(swaggerPath, 'utf-8'));
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-}
+// Rutas de la API
+app.use("/api/users", apiKeyMiddleware, usersRoutes);
+app.use("/api/categories", categoriesRoutes);
+app.use("/api/orders", ordersRoutes);
+app.use("/api/order-items", orderItemsRoutes);
+app.use("/", productsRoutes);
 
-export default app;   
+export default app;
