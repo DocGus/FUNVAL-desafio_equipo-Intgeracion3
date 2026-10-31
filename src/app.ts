@@ -1,4 +1,3 @@
-
 import express from "express";
 import swaggerUi from "swagger-ui-express";
 
@@ -10,6 +9,7 @@ import usersRoutes from "./routes/users.routes";
 import categoriesRoutes from "./routes/categories.routes";
 import ordersRoutes from "./routes/orders.routes";
 import orderItemsRoutes from "./routes/orderItems.routes";
+import productsRoutes from "./routes/products.routes";
 
 const swaggerDocument = require("../swagger/swagger-output.json");
 
@@ -33,5 +33,6 @@ app.use("/api/users", apiKeyMiddleware, usersRoutes);
 app.use("/api/categories", categoriesRoutes);
 app.use("/api/orders", ordersRoutes);
 app.use("/api/order-items", orderItemsRoutes);
+app.use("/", productsRoutes);
 
 export default app;
